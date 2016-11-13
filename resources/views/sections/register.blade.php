@@ -18,7 +18,7 @@
 <br>
 <div class="container exclaimer">
     <div class="formulario">
-        <form class="form-horizontal" method="POST">
+        <form class="form-horizontal" method="POST" action="{{ action('RegistroController@guardarRegistro') }}">
 
             <div class="alert alert-warning">
                 <strong>Recuerda!</strong> Todos los datos marcados con asterisco ( * ) Son obligatorios.
@@ -63,6 +63,40 @@
                 <label for="nacimiento" class="control-label col-sm-2">Fecha de Nacimiento *:</label>
                 <div class="col-sm-9">
                     <input type="date" class="form-control" required="required" id="birthday" name="birthday" placeholder="Indique su Fecha de Nacimiento *">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="edad">Edad *:</label>
+                <div class="col-sm-9">
+                    <input type="number" value="embarazo" class="form-control" required="required" id="edad" name="edad" placeholder="Digite su edad *">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="ciudad" class="control-label col-sm-2">Ciudad : </label>
+                <div class="col-sm-9">
+                    <select required class="form-control" id="sel1">
+                        <option value="0">Seleccione su ciudad de residencia</option>
+                        <option value="11001">Bogota</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="embarazo">Si es mujer :</label>
+                <div class="col-sm-9">
+                    <label for="embarazo">
+                        <input type="checkbox" id="embarazo" name="embarazo">
+                        ¿Se encuentra usted en estado de embarazo?
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="celular" class="control-label col-sm-2">¿Tiene algun tipo de enfermedad? :</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="enfermedad" name="enfermedad" placeholder="Indique su enfermedad si tiene">
                 </div>
             </div>
 

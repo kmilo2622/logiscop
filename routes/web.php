@@ -52,3 +52,7 @@ Route::get('plan-proteccion', function(){
 Route::get('register', 'RegistroController@registro');
 
 Route::get('start', 'RegistroController@start');
+
+//Funcionamiento de la pagina web
+
+Route::get('registrarse', 'RegistroController@guardarRegistro');
