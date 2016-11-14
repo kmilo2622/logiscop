@@ -3,6 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Cliente;
+use App\Afiliacion;
+use App\Riesgo;
+use App\EPS;
+use App\Caja;
+use App\Ciudad;
+use App\Beneficiario;
+use App\Pension;
 
 use Illuminate\Http\Request;
 
@@ -18,7 +25,19 @@ class RegistroController extends Controller
 
 	public function guardarRegistro(){
 
-		$cliente = Cliente::firstOrCreate([
+		$cliente = Cliente::with('ciudades')
+		->with('afiliaciones')
+		->with('beneficiarios')
+		->with('cajas')
+		->with('eps')
+		->with('pensiones')
+		->with('estados')
+		->with('riesgos')
+		->get();
+
+		return $cliente;
+
+		/*$cliente = Cliente::firstOrCreate([
 			'nombre' => 'John Arij',
 			'cedula' => 1023026521,
 			'email' => 'juanca-arroyave@hotmail.com',
@@ -34,8 +53,6 @@ class RegistroController extends Controller
 			'id_caja' => 1,
 			'id_beneficiario' => 2,
 			'id_pension' => 1,
-			]);
-
-		echo "Cliente Ingresado Exitosamente";
+			]);*/
+		}
 	}
-}

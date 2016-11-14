@@ -18,7 +18,7 @@ class CreateClientesTable extends Migration
             $table->mediumText('nombre');
             $table->bigInteger('cedula');
             $table->string('email');
-            $table->string('contraseña');
+            $table->string('contrasena');
             $table->string('nacimiento');
             $table->integer('id_estado')->references('id')->on('estados')->nullable();
             $table->integer('edad');

@@ -17,7 +17,7 @@ class CreateAfiliacionsTable extends Migration
             $table->increments('id');
             $table->string('plan');
             $table->string('afiliacion');
-            $table->string('precio');
+            $table->bigInteger('precio');
             $table->timestamps();
         });
     }

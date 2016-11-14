@@ -26,11 +26,11 @@ CREATE TABLE `afiliacions` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `plan` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `afiliacion` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `precio` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `precio` bigint(20) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,6 +39,7 @@ CREATE TABLE `afiliacions` (
 
 LOCK TABLES `afiliacions` WRITE;
 /*!40000 ALTER TABLE `afiliacions` DISABLE KEYS */;
+INSERT INTO `afiliacions` VALUES (1,'Basico','EPS + ARL',69900,'2016-11-15 00:14:00','2016-11-15 00:14:00'),(2,'Complementario','EPS + ARL + CAJA',89900,'2016-11-15 00:15:50','2016-11-15 00:15:50'),(3,'Proteccion','EPS + ARL + PENSION',186900,'2016-11-15 00:16:47','2016-11-15 00:16:47'),(4,'Integral','EPS + ARL + PENSION + CAJA',199900,'2016-11-15 00:17:43','2016-11-15 00:17:43');
 /*!40000 ALTER TABLE `afiliacions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -55,7 +56,7 @@ CREATE TABLE `beneficiarios` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -64,6 +65,7 @@ CREATE TABLE `beneficiarios` (
 
 LOCK TABLES `beneficiarios` WRITE;
 /*!40000 ALTER TABLE `beneficiarios` DISABLE KEYS */;
+INSERT INTO `beneficiarios` VALUES (1,'Si tengo, mi(s) hijos(as)','2016-11-15 01:24:10','2016-11-15 01:24:10'),(2,'Si, mi conyugue','2016-11-15 01:24:10','2016-11-15 01:24:10'),(3,'Si, mis padres dependen economicamente de mi','2016-11-15 01:24:10','2016-11-15 01:24:10');
 /*!40000 ALTER TABLE `beneficiarios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -81,7 +83,7 @@ CREATE TABLE `cajas` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -90,6 +92,7 @@ CREATE TABLE `cajas` (
 
 LOCK TABLES `cajas` WRITE;
 /*!40000 ALTER TABLE `cajas` DISABLE KEYS */;
+INSERT INTO `cajas` VALUES (1,'Colsubsidio',11001,'2016-11-15 01:19:48','2016-11-15 01:19:48'),(2,'Compensar',11001,'2016-11-15 01:19:48','2016-11-15 01:19:48'),(3,'Comfama',5001,'2016-11-15 01:19:48','2016-11-15 01:19:48'),(4,'Comfrem',50001,'2016-11-15 01:19:48','2016-11-15 01:19:48'),(5,'Comfenalco',63001,'2016-11-15 01:19:48','2016-11-15 01:19:48'),(6,'Comfamiliar',66001,'2016-11-15 01:19:48','2016-11-15 01:19:48');
 /*!40000 ALTER TABLE `cajas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -101,13 +104,14 @@ DROP TABLE IF EXISTS `ciudads`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ciudads` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `ciudad` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `id_departamento` int(11) NOT NULL,
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `codigo` int(10) DEFAULT NULL,
+  `ciudad` varchar(45) DEFAULT NULL,
+  `id_departamento` int(10) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -116,6 +120,7 @@ CREATE TABLE `ciudads` (
 
 LOCK TABLES `ciudads` WRITE;
 /*!40000 ALTER TABLE `ciudads` DISABLE KEYS */;
+INSERT INTO `ciudads` VALUES (1,11001,'Bogota',1,'2016-11-15 01:14:23','2016-11-15 01:14:23'),(2,5001,'Medellin',2,'2016-11-15 01:14:23','2016-11-15 01:14:23'),(3,50001,'Villavicencio',3,'2016-11-15 01:14:23','2016-11-15 01:14:23'),(4,63001,'Armenia',4,'2016-11-15 01:14:23','2016-11-15 01:14:23'),(5,76001,'Cali',5,'2016-11-15 01:14:23','2016-11-15 01:14:23'),(6,66001,'Pereira',6,'2016-11-15 01:14:23','2016-11-15 01:14:23');
 /*!40000 ALTER TABLE `ciudads` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -131,7 +136,7 @@ CREATE TABLE `clientes` (
   `nombre` mediumtext COLLATE utf8_unicode_ci NOT NULL,
   `cedula` bigint(20) NOT NULL,
   `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `contraseña` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `contrasena` varchar(255) CHARACTER SET utf8 NOT NULL,
   `nacimiento` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `id_estado` int(11) DEFAULT NULL,
   `edad` int(11) NOT NULL,
@@ -200,7 +205,7 @@ CREATE TABLE `e_p_s` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -209,6 +214,7 @@ CREATE TABLE `e_p_s` (
 
 LOCK TABLES `e_p_s` WRITE;
 /*!40000 ALTER TABLE `e_p_s` DISABLE KEYS */;
+INSERT INTO `e_p_s` VALUES (1,'Cafesalud','2016-11-15 00:33:10','2016-11-15 00:33:10'),(2,'Coomeva','2016-11-15 00:33:10','2016-11-15 00:33:10'),(3,'Compensar','2016-11-15 00:33:10','2016-11-15 00:33:10'),(4,'Cruz Blanca','2016-11-15 00:33:10','2016-11-15 00:33:10'),(5,'Famisanar','2016-11-15 00:33:10','2016-11-15 00:33:10'),(6,'Nueva EPS','2016-11-15 00:33:10','2016-11-15 00:33:10'),(7,'Salud Total','2016-11-15 00:33:10','2016-11-15 00:33:10'),(8,'Sanitas','2016-11-15 00:33:10','2016-11-15 00:33:10'),(9,'Sura','2016-11-15 00:33:10','2016-11-15 00:33:10');
 /*!40000 ALTER TABLE `e_p_s` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -250,7 +256,7 @@ CREATE TABLE `estados` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -259,6 +265,7 @@ CREATE TABLE `estados` (
 
 LOCK TABLES `estados` WRITE;
 /*!40000 ALTER TABLE `estados` DISABLE KEYS */;
+INSERT INTO `estados` VALUES (1,'activo',NULL,NULL),(2,'inactivo',NULL,NULL);
 /*!40000 ALTER TABLE `estados` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -325,7 +332,7 @@ CREATE TABLE `pensions` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -334,6 +341,7 @@ CREATE TABLE `pensions` (
 
 LOCK TABLES `pensions` WRITE;
 /*!40000 ALTER TABLE `pensions` DISABLE KEYS */;
+INSERT INTO `pensions` VALUES (1,'Proteccion','2016-11-15 01:26:02','2016-11-15 01:26:02'),(2,'Porvenir','2016-11-15 01:26:02','2016-11-15 01:26:02'),(3,'Colpensiones','2016-11-15 01:26:02','2016-11-15 01:26:02'),(4,'Colfondos','2016-11-15 01:26:02','2016-11-15 01:26:02'),(5,'OldMutual','2016-11-15 01:26:02','2016-11-15 01:26:02');
 /*!40000 ALTER TABLE `pensions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -351,7 +359,7 @@ CREATE TABLE `riesgos` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -360,6 +368,7 @@ CREATE TABLE `riesgos` (
 
 LOCK TABLES `riesgos` WRITE;
 /*!40000 ALTER TABLE `riesgos` DISABLE KEYS */;
+INSERT INTO `riesgos` VALUES (1,1,'Personal de oficinas , Vendedores, Zapateros, Servicio Doméstico, Administradores, Amas de Casa.','2016-11-15 00:21:37','2016-11-15 00:21:37'),(2,2,'Billares, Personal de Restaurante, Ferreterías, Confecciones, Labor Agrícola','2016-11-15 00:22:32','2016-11-15 00:22:32'),(3,3,'Cerrajero, Mecánico, Ebanista, Pintores sin Altura, Electricista','2016-11-15 00:23:25','2016-11-15 00:23:25'),(4,4,'Conductores, Ayudantes','2016-11-15 00:23:49','2016-11-15 00:23:49'),(5,5,'Construcción, Químicos, Escoltas, Pintores y personal de Alturas','2016-11-15 00:24:38','2016-11-15 00:24:38');
 /*!40000 ALTER TABLE `riesgos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -401,4 +410,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-11-13 17:52:26
+-- Dump completed on 2016-11-14 15:40:59
