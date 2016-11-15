@@ -93,7 +93,7 @@
     </div>
 </div>
 
-<a href="register">
+<a href="register" id="registrarse-index">
     <div class="front-image2">
         <br>
         <br>

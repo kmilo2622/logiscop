@@ -12,6 +12,11 @@ body{
     box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.75);
 }
 
+#registrarse-index, a:hover {
+    color: #23527c;
+    text-decoration: none;
+}
+
 .footer{
     font-size: 15px;
     font-weight: bold;
