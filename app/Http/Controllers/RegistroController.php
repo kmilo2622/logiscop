@@ -23,7 +23,19 @@ class RegistroController extends Controller
 		return view('sections/start');
 	}
 
-	public function guardarRegistro(){
+	public function guardarRegistro(Request $request){
+
+		$email = $request->input('email');
+		$pass = $request->input('pwd');
+		$mensaje = null;
+
+		if($email == '123@123.com' && $pass == "mama45"){
+			$mensaje = "Funciona";
+		} else {
+			$mensaje = "Usuario incorrecto";
+		}
+
+		return view('sections.start')->with("mensaje", $mensaje);
 
 		$cliente = Cliente::with('ciudades')
 		->with('afiliaciones')

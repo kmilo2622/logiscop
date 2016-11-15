@@ -18,7 +18,7 @@
 <br>
 <div class="container exclaimer">
     <div class="formulario">
-        <form class="form-horizontal" method="POST" action="{{ action('RegistroController@guardarRegistro') }}">
+        <form class="form-horizontal" method="GET" route="register.create">
 
             <div class="alert alert-warning">
                 <strong>Recuerda!</strong> Todos los datos marcados con asterisco ( * ) Son obligatorios.
@@ -240,7 +240,7 @@
             <div class="alert alert-info">
               <strong>
                   Puedes adjuntar la cedula ahora o despúes
-              </strong>  
+              </strong>
               Comprobaremos que tu afiliacion se pueda realizar y te indicaremos las formas de pago ¡Gracias por escogernos!
           </div>
 

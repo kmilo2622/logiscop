@@ -55,4 +55,5 @@ Route::get('start', 'RegistroController@start');
 
 //Funcionamiento de la pagina web
 
-Route::get('registrarse', 'RegistroController@guardarRegistro');
+Route::get('registrarse', ['as'=>'register.create',
+'uses' => 'RegistroController@guardarRegistro']);

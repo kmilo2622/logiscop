@@ -10,7 +10,9 @@
 </div>
 <div class="container exclaimer">
 	<div class="formulario">
-		<form class="form-horizontal" method="POST" url="registrarse">
+		<form class="form-horizontal" method="GET" action="{{ action('RegistroController@guardarRegistro') }}">
+
+			{{ $mensaje }}
 
 			<div class="form-group">
 				<label class="control-label col-sm-2" for="email">Email *:</label>
