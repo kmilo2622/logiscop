@@ -20,22 +20,11 @@ class RegistroController extends Controller
 	}
 
 	public function start(){
-		return view('sections/start');
+		$mensaje = "<h4><strong>Iniciar Sesion</strong></h4>";
+		return view('sections/start')->with("mensaje", $mensaje);
 	}
 
 	public function guardarRegistro(Request $request){
-
-		$email = $request->input('email');
-		$pass = $request->input('pwd');
-		$mensaje = null;
-
-		if($email == '123@123.com' && $pass == "mama45"){
-			$mensaje = "Funciona";
-		} else {
-			$mensaje = "Usuario incorrecto";
-		}
-
-		return view('sections.start')->with("mensaje", $mensaje);
 
 		$cliente = Cliente::with('ciudades')
 		->with('afiliaciones')
@@ -47,7 +36,23 @@ class RegistroController extends Controller
 		->with('riesgos')
 		->get();
 
-		return $cliente;
+		$email = $request->input('email');
+		$pass = $request->input('pwd');
+		$mensaje = null;
+
+		if($email == $cliente->email && $pass == $cliente->contrasena){
+			$mensaje = "<div class='alert alert-success' align='center'>";
+			$mensaje .= "<p>Sesión iniciada correctamente</p>";
+			$mensaje .= "</div>";
+			return view('sections.panel.profile')->with("mensaje", $mensaje);
+		} else {
+			$mensaje = "<div class='alert alert-danger' align='center'>";
+			$mensaje .= "<p>Usuario incorrecto</p>";
+			$mensaje .= "</div>";
+			return view('sections.start')->with("mensaje", $mensaje);
+		}
+
+		//return $cliente;
 
 		/*$cliente = Cliente::firstOrCreate([
 			'nombre' => 'John Arij',

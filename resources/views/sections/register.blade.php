@@ -253,7 +253,7 @@
 
         <!--Submit Button-->
         <div class="form-group" align="center">
-            <div class="col-sm-offset-2 col-sm-9">
+            <div align="center">
                 <button type="submit" class="btn btn-success btn-lg">Registrarse como Afiliado</button>
             </div>
         </div>
