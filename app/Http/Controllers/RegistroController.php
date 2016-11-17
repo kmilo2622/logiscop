@@ -115,9 +115,12 @@ public function iniciarSesion(Request $request){
 		//echo $c['contrasena'] . "<br /> ";
 		if($email == $c['email'] && $pass == $c['contrasena']){
 			$mensaje = "<div class='alert alert-success' align='center' style='margin-right:50px; margin-left:50px;'>";
-			$mensaje .= "<p>Sesión iniciada correctamente</p>";
+			$mensaje .= "<p>Hola! ".$c['nombre']."</p>";
 			$mensaje .= "</div>";
-			return view('sections.panel.profile')->with("mensaje", $mensaje);
+			return view('sections.panel.profile')
+			->with("cliente", $c['nombre'])
+			->with("informacion", $c)
+			->with("mensaje", $mensaje);
 		} else {
 			$mensaje = "<div class='alert alert-danger' align='center' style='margin-right:50px; margin-left:50px;''>";
 			$mensaje .= "<p>Usuario incorrecto</p>";
