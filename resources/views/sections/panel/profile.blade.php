@@ -15,6 +15,6 @@
     <h3>Nombre </h3> {{ $cliente }}
     <h3>Cédula </h3> {{ $informacion['cedula'] }}
     <h3>Correo Electrónico </h3> {{ $informacion['email'] }}
-    <h3>Edad </h3> {{ $informacion['edad'] . " años" }} 
+    <h3>Edad </h3> {{ $informacion['edad'] . " años" }}
 </div>
 @include('templates/footer')
