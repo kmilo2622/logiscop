@@ -12,10 +12,6 @@
     </div>
     <div class="col-sm-9">
         Registrate sólo si estás seguro (a) de afiliarte con tus beneficiarios a la seguridad social y aceptas las condiciones del servicio indicadas en cada plan de servicios. Afiliamos como cotizante dependiente. Con nuestra tecnología y grupo de asesores, podrás pagar en línea o en BALOTO y EFECTY, descargar certificados de afiliación y/o planillas. Después de una rápida verificación, te enviaremos factura de pago y recibirás al correo la información sobre documentos requeridos y tiempos de afiliación según los servicios contratados. Solicita soporte para tus preguntas y dudas a través del PBX, Correo electrónico, Chat o Whatsapp
-
-        @php
-        echo $mensaje;
-        @endphp
     </div>
 </div>
 <br>
@@ -26,9 +22,9 @@
 
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
-            <div class="alert alert-warning">
-                <strong>Recuerda!</strong> Todos los datos marcados con asterisco ( * ) Son obligatorios.
-            </div>
+            @php
+            echo $mensaje;
+            @endphp
 
             <div class="form-group">
                 <label class="control-label col-sm-2" for="name">Nombres y Apellidos *:</label>
@@ -244,26 +240,26 @@
             </div>
 
             <div class="alert alert-info">
-              <strong>
-                  Puedes adjuntar la cedula ahora o despúes
-              </strong>
-              Comprobaremos que tu afiliacion se pueda realizar y te indicaremos las formas de pago ¡Gracias por escogernos!
-          </div>
-
-          <div class="form-group">
-            <label for="terms" class="control-label col-sm-2">Términos y Condiciones *:</label>
-            <div class="col-sm-9">
-                <input type="checkbox" id="acceptedterms" name="acceptedterms" required="required" value="1"> Acepto <a href="#">Términos y Condiciones</a>
+                <strong>
+                    Puedes adjuntar la cedula ahora o despúes
+                </strong>
+                Comprobaremos que tu afiliacion se pueda realizar y te indicaremos las formas de pago ¡Gracias por escogernos!
             </div>
-        </div>
 
-        <!--Submit Button-->
-        <div class="form-group" align="center">
-            <div align="center">
-                <button type="submit" class="btn btn-success btn-lg">Registrarse como Afiliado</button>
+            <div class="form-group">
+                <label for="terms" class="control-label col-sm-2">Términos y Condiciones *:</label>
+                <div class="col-sm-9">
+                    <input type="checkbox" id="acceptedterms" name="acceptedterms" required="required" value="1"> Acepto <a href="#">Términos y Condiciones</a>
+                </div>
             </div>
-        </div>
-    </form>
-</div>
+
+            <!--Submit Button-->
+            <div class="form-group" align="center">
+                <div align="center">
+                    <button type="submit" class="btn btn-success btn-lg">Registrarse como Afiliado</button>
+                </div>
+            </div>
+        </form>
+    </div>
 </div>
 @include('templates/footer')
