@@ -12,13 +12,19 @@
     </div>
     <div class="col-sm-9">
         Registrate sólo si estás seguro (a) de afiliarte con tus beneficiarios a la seguridad social y aceptas las condiciones del servicio indicadas en cada plan de servicios. Afiliamos como cotizante dependiente. Con nuestra tecnología y grupo de asesores, podrás pagar en línea o en BALOTO y EFECTY, descargar certificados de afiliación y/o planillas. Después de una rápida verificación, te enviaremos factura de pago y recibirás al correo la información sobre documentos requeridos y tiempos de afiliación según los servicios contratados. Solicita soporte para tus preguntas y dudas a través del PBX, Correo electrónico, Chat o Whatsapp
+
+        @php
+        echo $mensaje;
+        @endphp
     </div>
 </div>
 <br>
 <br>
 <div class="container exclaimer">
     <div class="formulario">
-        <form class="form-horizontal" method="GET" route="register.create">
+        <form class="form-horizontal" method="POST" action="{{ action('RegistroController@guardarRegistro') }}">
+
+            <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
             <div class="alert alert-warning">
                 <strong>Recuerda!</strong> Todos los datos marcados con asterisco ( * ) Son obligatorios.
@@ -34,7 +40,7 @@
             <div class="form-group">
                 <label class="control-label col-sm-2" for="cedula">Cédula *:</label>
                 <div class="col-sm-9">
-                    <input type="number" class="form-control" required="required" id="cedula" name="cedula" placeholder="Digite su cédula *">
+                    <input type="number" class="form-control" required="required" id="identificacion" name="identificacion" placeholder="Digite su cédula *">
                 </div>
             </div>
 
@@ -62,7 +68,7 @@
             <div class="form-group">
                 <label for="nacimiento" class="control-label col-sm-2">Fecha de Nacimiento *:</label>
                 <div class="col-sm-9">
-                    <input type="date" class="form-control" required="required" id="birthday" name="birthday" placeholder="Indique su Fecha de Nacimiento *">
+                    <input type="date" class="form-control" required="required" id="nacimiento" name="nacimiento" placeholder="Indique su Fecha de Nacimiento *">
                 </div>
             </div>
 
@@ -76,7 +82,7 @@
             <div class="form-group">
                 <label for="ciudad" class="control-label col-sm-2">Ciudad : </label>
                 <div class="col-sm-9">
-                    <select required class="form-control" id="sel1">
+                    <select required class="form-control" id="sel1" name="city">
                         <option value="0">Seleccione su ciudad de residencia</option>
                         <option value="11001">Bogota</option>
                     </select>
@@ -87,7 +93,7 @@
                 <label class="control-label col-sm-2" for="embarazo">Si es mujer :</label>
                 <div class="col-sm-9">
                     <label for="embarazo">
-                        <input type="checkbox" id="embarazo" name="embarazo">
+                        <input type="checkbox" value="embarazo" id="embarazo" name="embarazo">
                         ¿Se encuentra usted en estado de embarazo?
                     </label>
                 </div>
@@ -124,7 +130,7 @@
             <div class="form-group">
                 <label for="riesgo" class="control-label col-sm-2">Nivel de Riesgo *: </label>
                 <div class="col-sm-9">
-                    <select required class="form-control" id="sel1">
+                    <select required class="form-control" id="sel1" name="riesgo">
                         <option value="0">Seleccione deacuerdo a su ocupación</option>
                         <option value="1">NIVEL 1: (Personal de oficinas , Vendedores, Zapateros, Servicio Doméstico, Administradores, Amas de Casa.)</option>
                         <option value="2">NIVEL 2: (Billares, Personal de Restaurante, Ferreterías, Confecciones, Labor Agrícola)</option>
@@ -138,7 +144,7 @@
             <div class="form-group">
                 <label for="tipo" class="control-label col-sm-2">Tipo de Afiliación *: </label>
                 <div class="col-sm-9">
-                    <select required class="form-control" id="sel1">
+                    <select required class="form-control" id="sel1" name="afiliacion">
                         <option value="0">Seleccione los servicios que desea cotizar</option>
                         <option value="1">Básico EPS + ARL (Desde $69.900)</option>
                         <option value="2">Complementario EPS + ARL + CAJA (Desde $89.900)</option>
@@ -169,7 +175,7 @@
             <div class="form-group">
                 <label for="eps" class="control-label col-sm-2">EPS (Salud) *: </label>
                 <div class="col-sm-9">
-                    <select required class="form-control" id="sel1">
+                    <select required class="form-control" id="sel1" name="epSalud">
                         <option value="0">Seleccionar</option>
                         <option value="1">Cafesalud</option>
                         <option value="2">Coomeva</option>
@@ -187,7 +193,7 @@
             <div class="form-group">
                 <label for="caja" class="control-label col-sm-2">Caja de Compensación *: </label>
                 <div class="col-sm-9">
-                    <select required class="form-control" id="sel1">
+                    <select required class="form-control" id="sel1" name="cajaCompensacion">
                         <option value="1">Escogí un Plan sin caja de compensación</option>
                         <option value="2">Bogotá - Colsubsidio</option>
                         <option value="3">Bogotá - Compensar</option>
@@ -203,7 +209,7 @@
             <div class="form-group">
                 <label for="beneficiarios" class="control-label col-sm-2">Beneficiarios *: </label>
                 <div class="col-sm-9">
-                    <select required class="form-control" id="sel1">
+                    <select required class="form-control" id="sel1" name="beneficiarios">
                         <option value="1">No tengo Beneficiarios</option>
                         <option value="2">Si tengo, mi(s) hijos(as)</option>
                         <option value="3">Si tengo, mi(s) hijos(as)</option>
@@ -216,7 +222,7 @@
             <div class="form-group">
                 <label for="pension" class="control-label col-sm-2">Pensión *: </label>
                 <div class="col-sm-9">
-                    <select required class="form-control" id="sel1">
+                    <select required class="form-control" id="sel1" name="pensiones">
                         <option value="1">No requiero cotizar</option>
                         <option value="2">Protección</option>
                         <option value="3">Porvenir</option>

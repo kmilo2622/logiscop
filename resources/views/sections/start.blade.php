@@ -7,12 +7,12 @@
 </div>
 <div align="center" style="margin-top: 30px; margin-bottom: 0;">
 	@php
-		echo $mensaje;
+	echo $mensaje;
 	@endphp
 </div>
 <div class="container exclaimer">
 	<div class="formulario">
-		<form class="form-horizontal" method="POST" action="{{ action('RegistroController@guardarRegistro') }}">
+		<form class="form-horizontal" method="POST" action="{{ action('RegistroController@iniciarSesion') }}">
 			<input type="hidden" name="_token" value="{{ csrf_token() }}">
 			<div class="form-group">
 				<label class="control-label col-sm-2" for="email">Email *:</label>

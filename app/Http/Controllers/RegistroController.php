@@ -16,7 +16,8 @@ use Illuminate\Http\Request;
 class RegistroController extends Controller
 {
 	public function registro(){
-		return view('sections/register');
+		$mensaje = "<h4><strong>Registrarse</strong></h4>";
+		return view('sections/register')->with("mensaje", $mensaje);
 	}
 
 	public function start(){
@@ -25,6 +26,63 @@ class RegistroController extends Controller
 	}
 
 	public function guardarRegistro(Request $request){
+
+		$perfil = Cliente::get();
+
+		$clientecito = $request->all();
+
+		$password = $request['pwd'];
+
+		if ($password != $request['pwd-confirmation']) {
+			$mensaje = "La contraseña debe ser igual en cada caso";
+			return view('sections.register')->with("mensaje". $mensaje);
+		}
+
+		//dd($clientecito); die;
+
+		foreach ($perfil as $p) {
+			if ($clientecito['acceptedterms'] == 1) {
+
+				if ($clientecito['identificacion'] != $p->cedula) {
+					$cliente = Cliente::firstOrCreate([
+						'nombre' => $clientecito['nombre'],
+						'cedula' => $clientecito['identificacion'],
+						'email' => $clientecito['email'],
+						'contrasena' => $password,
+						'nacimiento' => $clientecito['nacimiento'],
+						'id_estado' => 1,
+						'edad' => $clientecito['edad'],
+						'celular' => $clientecito['edad'],
+						'telefono' => $clientecito['telefono'],
+						'referido' => $clientecito['referido'],
+						'id_ciudad' => $clientecito['city'],
+						'id_riesgo' => $clientecito['riesgo'],
+						'id_afiliacion' => $clientecito['afiliacion'],
+						'id_eps' => $clientecito['epSalud'],
+						'id_caja' => $clientecito['cajaCompensacion'],
+						'id_beneficiario' => $clientecito['beneficiarios'],
+						'id_pension' => $clientecito['pensiones'],
+						]);
+
+					$mensaje = "Cliente ingresado exitosamente";
+
+					return view('sections.register')->with("mensaje". $mensaje);
+				} elseif ($clientecito['identificacion'] == $p->cedula) {
+					$mensaje = "No se pudo insertar porque la identificacion ya existe";
+
+					return view('sections.register')->with("mensaje". $mensaje);
+				}
+			} else {
+				$mensaje = "Debe aceptar terminos y condiciones";
+				return view('sections.register')->with("mensaje". $mensaje);
+			}
+		}
+	}
+
+	public function iniciarSesion(Request $request){
+		$email = $request->input('email');
+		$pass = $request->input('pwd');
+		$mensaje = null;
 
 		$cliente = Cliente::with('ciudades')
 		->with('afiliaciones')
@@ -36,40 +94,18 @@ class RegistroController extends Controller
 		->with('riesgos')
 		->get();
 
-		$email = $request->input('email');
-		$pass = $request->input('pwd');
-		$mensaje = null;
-
-		if($email == $cliente->email && $pass == $cliente->contrasena){
-			$mensaje = "<div class='alert alert-success' align='center'>";
-			$mensaje .= "<p>Sesión iniciada correctamente</p>";
-			$mensaje .= "</div>";
-			return view('sections.panel.profile')->with("mensaje", $mensaje);
-		} else {
-			$mensaje = "<div class='alert alert-danger' align='center'>";
-			$mensaje .= "<p>Usuario incorrecto</p>";
-			$mensaje .= "</div>";
-			return view('sections.start')->with("mensaje", $mensaje);
-		}
-
-		//return $cliente;
-
-		/*$cliente = Cliente::firstOrCreate([
-			'nombre' => 'John Arij',
-			'cedula' => 1023026521,
-			'email' => 'juanca-arroyave@hotmail.com',
-			'contraseña' => 'mama45',
-			'nacimiento' => '26-03-1998',
-			'id_estado' => 1,
-			'edad' => 18,
-			'celular' => 3216226647,
-			'id_ciudad' => 11001,
-			'id_riesgo' => 1,
-			'id_afiliacion' => 1,
-			'id_eps' => 1,
-			'id_caja' => 1,
-			'id_beneficiario' => 2,
-			'id_pension' => 1,
-			]);*/
+		foreach ($cliente as $c) {
+			if($email == $c['email'] && $pass == $c['contrasena']){
+				$mensaje = "<div class='alert alert-success' align='center' style='margin-right:50px; margin-left:50px;'>";
+				$mensaje .= "<p>Sesión iniciada correctamente</p>";
+				$mensaje .= "</div>";
+				return view('sections.panel.profile')->with("mensaje", $mensaje);
+			} else {
+				$mensaje = "<div class='alert alert-danger' align='center' style='margin-right:50px; margin-left:50px;''>";
+				$mensaje .= "<p>Usuario incorrecto</p>";
+				$mensaje .= "</div>";
+				return view('sections.start')->with("mensaje", $mensaje);
+			}
 		}
 	}
+}

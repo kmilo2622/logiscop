@@ -55,5 +55,8 @@ Route::get('start', 'RegistroController@start');
 
 //Funcionamiento de la pagina web
 
+Route::post('inserted', ['as'=>'register.create',
+	'uses' => 'RegistroController@guardarRegistro']);
+
 Route::post('success', ['as'=>'register.create',
-'uses' => 'RegistroController@guardarRegistro']);
+	'uses' => 'RegistroController@iniciarSesion']);
